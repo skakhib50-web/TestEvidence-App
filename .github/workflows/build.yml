@@ -5,7 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: unzip -q TestEvidence.zip
+        with:
+          fetch-depth: 0
+      - name: Unzip newest zip
+        run: |
+          NEWEST=$(for f in *.zip; do echo "$(git log -1 --format=%ct -- "$f")|$f"; done | sort -n | tail -1 | cut -d'|' -f2-)
+          echo "Using: $NEWEST"
+          unzip -q "$NEWEST"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
