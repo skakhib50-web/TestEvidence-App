@@ -24,4 +24,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: TestEvidence-apk
-          path: TestEvidence/app/build/outputs/apk/debug/app-debug.apk
+          path: TestEvidence/app/build/outputs/apk/**/debug/*.apk
